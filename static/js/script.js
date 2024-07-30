@@ -33,4 +33,19 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data.error) {
                 addMessageToChat(data.error, "bot-message");
             } else {
-                addMessage
+                addMessageToChat(data.response, "bot-message");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            addMessageToChat("Sorry, there was a problem processing your request.", "bot-message");
+        });
+    }
+
+    function addMessageToChat(message, className) {
+        const messageElement = document.createElement("div");
+        messageElement.className = className;
+        messageElement.textContent = message;
+        chatOutput.appendChild(messageElement);
+    }
+});
