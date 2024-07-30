@@ -41,7 +41,7 @@ def construct_system_prompt(faq_data):
     return f"{prompt_intro}\n\nFAQs:\n{faq_content}"
 
 # Load FAQ data and construct system prompt
-faq_data = load_faq_data(r"C:\Users\adeye\Documents\CPI\GNA\gna_chatbot\flask-bot\faq.json")
+faq_data = load_faq_data("faq.json")
 if faq_data:
     system_prompt = construct_system_prompt(faq_data)
 else:
