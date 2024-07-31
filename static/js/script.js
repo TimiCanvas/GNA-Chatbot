@@ -10,17 +10,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Function to send an introductory message
+    function sendIntroductoryMessage() {
+        const introMessage = "Hi, my name is John, I am a customer service agent for GNA, how may I help you today?";
+        addMessageToChat(introMessage, "bot-message");
+    }
+
+    // Sends the introductory message when the page loads
+    sendIntroductoryMessage();
+
     function sendMessage() {
         const userMessage = userMessageInput.value.trim();
         if (userMessage === "") {
             return;
         }
 
-        // Add user message to chat
+        // Adds user message to chat
         addMessageToChat(userMessage, "user-message");
         userMessageInput.value = "";
 
-        // Send message to the Flask server
+        // Sends message to the Flask server
         fetch("/chat", {
             method: "POST",
             headers: {
@@ -38,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => {
             console.error("Error:", error);
-            addMessageToChat("Sorry, there was a problem processing your request.", "bot-message");
+            addMessageToChat("Sorry, I'm having trouble processing your request at the moment.", "bot-message");
         });
     }
 
@@ -47,5 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
         messageElement.className = className;
         messageElement.textContent = message;
         chatOutput.appendChild(messageElement);
+        chatOutput.scrollTop = chatOutput.scrollHeight; // Scrolls to the bottom
     }
 });
